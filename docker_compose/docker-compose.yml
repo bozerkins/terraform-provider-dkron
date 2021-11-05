@@ -1,0 +1,6 @@
+services:
+  dkron-server:
+    image: dkron/dkron:v3.1.10
+    ports:
+      - 8080:8080
+    command: agent --server --log-level debug --bootstrap-expect=1
