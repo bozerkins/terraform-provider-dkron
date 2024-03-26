@@ -23,6 +23,7 @@ resource "dkron_job" "job1" {
   timezone          = "Europe/Riga"
   executor          = "shell"
   command           = "date"
+  env               = "EDITOR=vi"
   cwd               = ""
   shell             = false
   allowed_exitcodes = "0, 199, 255"
@@ -50,6 +51,7 @@ resource "dkron_job" "job2" {
   timezone          = "Europe/Riga"
   executor          = "shell"
   command           = "date"
+  env               = "ENV1=envone"
   cwd               = ""
   shell             = false
   allowed_exitcodes = "0, 199, 255"
