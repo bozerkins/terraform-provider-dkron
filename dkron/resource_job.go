@@ -78,6 +78,11 @@ func resourceDkronJob() *schema.Resource {
 				Required: true,
 				Optional: false,
 			},
+			"env": {
+				Type:     schema.TypeString,
+				Required: true,
+				Optional: false,
+			},
 			"timeout": {
 				Type:     schema.TypeString,
 				Required: true,
@@ -169,6 +174,7 @@ type Job struct {
 	ParentJob      string                 `json:"parent_job"`
 	ExecutorConfig struct {
 		Command          string `json:"command"`
+		Env              string `json:"env"`
 		Timeout          string `json:"timeout"`
 		Project          string `json:"project"`
 		MemLimitKb       string `json:"mem_limit_kb"`
@@ -195,6 +201,7 @@ func resourceDkronJobCreate(ctx context.Context, d *schema.ResourceData, m inter
 	job.Retries = d.Get("retries").(int)
 	job.Executor = d.Get("executor").(string)
 	job.ExecutorConfig.Command = d.Get("command").(string)
+	job.ExecutorConfig.Env = d.Get("env").(string)
 	job.ExecutorConfig.Timeout = d.Get("timeout").(string)
 	job.ExecutorConfig.Project = d.Get("project").(string)
 	job.ExecutorConfig.MemLimitKb = d.Get("mem_limit_kb").(string)
@@ -303,6 +310,7 @@ func resourceDkronJobRead(ctx context.Context, d *schema.ResourceData, m interfa
 	d.Set("retries", job.Retries)
 	d.Set("executor", job.Executor)
 	d.Set("command", job.ExecutorConfig.Command)
+	d.Set("env", job.ExecutorConfig.Env)
 	d.Set("timeout", job.ExecutorConfig.Timeout)
 	d.Set("project", job.ExecutorConfig.Project)
 	d.Set("mem_limit_kb", job.ExecutorConfig.MemLimitKb)

@@ -18,6 +18,7 @@ resource "dkron_job" "job1_dms" {
   owner_email       = "gitlab@gitlabovich.com"
   executor          = "shell"
   command           = "date"
+  env               = "ENV1=envone"
   cwd               = ""
   shell             = false
   allowed_exitcodes = "0, 199, 255"
@@ -53,6 +54,7 @@ resource "dkron_job" "job2_dms" {
   owner_email       = "gitlab@gitlabovich.com"
   executor          = "shell"
   command           = "date"
+  env               = "ENV1=envone,ENV2=envtwo"
   cwd               = ""
   shell             = false
   allowed_exitcodes = "0, 199, 255"
